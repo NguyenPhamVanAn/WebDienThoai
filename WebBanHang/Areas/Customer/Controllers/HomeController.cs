@@ -39,7 +39,7 @@ namespace WebBanHang.Controllers
                 HttpContext.Session.SetJson("cart", cart);
                 return Json(new { success = "Ok", qty = cart.Items.Count });
             }else
-                return Json(new { error = "Ok" });
+                return Json(new { error = "Ok" }); 
         }
         public IActionResult Privacy()
         {
