@@ -1,0 +1,50 @@
+﻿<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>         
+    </tbody>
+</table>
+
+@section Scripts{  
+  <script>
+      $(document).ready(function () {
+          $.ajax({
+              url: "/product/getall",
+              success: function (data) {
+                  $('#myTable').DataTable({
+                      data: data,
+                      order: [[4, 'asc']],
+                      columns: [
+                          { data: 'name' },
+                          { data: 'price' },
+                          {
+                              data: 'imageUrl', render: function (data) {
+                                  if (data!=null)
+                                      return '<img src="' + data + '" style="width:100px" />';
+                                   else
+                                      return '';                                
+                              }
+                          },
+                          { data: 'category.name' },
+                          {
+                              data: 'id', render: function (data) {
+                                  var link = '<a href="Product/Update/' + data + '" class="btn btn-primary"> <i class="bi bi-pencil-square"></i> Edit</a>';
+                                      link += ' <a href="Product/Delete/' + data + '" class="btn btn-danger"> <i class="bi bi-pencil-square"></i> Delete</a>';
+                                  return link;
+                              }
+                          }
+                      ]
+                  });
+              }
+          });
+      });
+  </script>
+
+}

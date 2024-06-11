@@ -7,10 +7,10 @@ using WebBanHang.Models;
 
 namespace WebBanHang.Controllers
 {
-    public class CategoryControlller : Controller
+    public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public CategoryControlller(ApplicationDbContext db)
+        public CategoryController(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -61,7 +61,7 @@ namespace WebBanHang.Controllers
                 TempData["success"] = "Category updated success";
                 return RedirectToAction("Index");
             }
-            return View();
+            return View(category);
         }
         //Hiển thị form xác nhận xóa chủng loại
         public IActionResult Delete(int id)
