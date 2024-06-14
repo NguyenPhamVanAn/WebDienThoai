@@ -27,7 +27,6 @@ namespace WebBanHang
         {
             services.AddControllersWithViews();            
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("name=DefaultConnection"));
-            services.AddDistributedMemoryCache();
             services.AddSession();
             
         }
@@ -47,12 +46,9 @@ namespace WebBanHang
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
             app.UseSession();
-
             app.UseEndpoints(endpoints =>
             {
                  endpoints.MapControllerRoute(

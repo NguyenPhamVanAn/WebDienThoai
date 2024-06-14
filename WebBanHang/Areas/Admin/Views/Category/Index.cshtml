@@ -5,30 +5,30 @@
         <h2>LIST CATEGORY</h2>
     </div>
     <div class="col-md-6 text-right">
-        <a asp-action="Add" class="btn btn-primary">
+        <a asp-action="Add" class="btn btn-outline-success">
             <i class="bi bi-plus-circle-fill"></i> Add New
         </a>
     </div>
 </div>
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-active text-center" style="background-color:beige">
     <thead>
-        <tr>
+        <tr style="background-color:#096889;color:azure">
             <th>Name</th>
             <th>Display Order</th>
             <th> Action </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var x in Model)
+        @foreach (var a in Model)
         {
             <tr>
-                <td>@x.Name</td>
-                <td>@x.DisplayOrder</td>
+                <td>@a.Name</td>
+                <td>@a.DisplayOrder</td>
                 <td>
-                    <a asp-action="Update" asp-route-id="@x.Id" class="btn btn-success">
+                    <a asp-action="Update" asp-route-id="@a.Id" class="btn btn-outline-success">
                         <i class="bi bi-pencil-square"></i> Edit
                     </a>
-                    <a asp-action="Delete" asp-route-id="@x.Id" class="btn btn-danger">
+                    <a asp-action="Delete" asp-route-id="@a.Id" class="btn btn-outline-dark">
                         <i class="bi bi-trash"></i> Delete
                     </a>
                 </td>

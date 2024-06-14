@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.34031.81
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBanHang", "WebBanHang\WebBanHang.csproj", "{5A6686E1-1BAF-4B1B-8864-A9B015680F67}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinhHoa_LinQ", "MinhHoa_LinQ\MinhHoa_LinQ.csproj", "{102E6D0F-B87B-4D7B-8E73-2428B328C86C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web_Ban_Hang", "MinhHoa_LinQ\Web_Ban_Hang.csproj", "{102E6D0F-B87B-4D7B-8E73-2428B328C86C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCart", "TestCart\TestCart.csproj", "{B1A8792A-F1FF-4C2B-825B-216B04CB7583}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{102E6D0F-B87B-4D7B-8E73-2428B328C86C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{102E6D0F-B87B-4D7B-8E73-2428B328C86C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{102E6D0F-B87B-4D7B-8E73-2428B328C86C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1A8792A-F1FF-4C2B-825B-216B04CB7583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1A8792A-F1FF-4C2B-825B-216B04CB7583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1A8792A-F1FF-4C2B-825B-216B04CB7583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A8792A-F1FF-4C2B-825B-216B04CB7583}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

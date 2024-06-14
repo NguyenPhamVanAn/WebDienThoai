@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using WebBanHang.Helpers;
 using WebBanHang.Models;
 
 namespace WebBanHang.Controllers
@@ -23,33 +24,8 @@ namespace WebBanHang.Controllers
         public IActionResult Index()
         {
             var productlist = _db.Products.ToList();
-            return View(productlist);
-        }
-
-        public IActionResult AddToCart(int productId) {
-
-            var product = _db.Products.FirstOrDefault(p => p.Id == productId);
-            if (product != null)
-            {
-                var cart = HttpContext.Session.GetJson<Cart>("cart");
-                if (cart == null)
-                    cart = new Cart();
-
-                cart.Add(product, 1);
-                HttpContext.Session.SetJson("cart", cart);
-                return Json(new { success = "Ok", qty = cart.Items.Count });
-            }else
-                return Json(new { error = "Ok" }); 
-        }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+            return View(productlist);           
+           
+        }     
     }
 }

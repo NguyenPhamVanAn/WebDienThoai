@@ -5,40 +5,75 @@ using System.Threading.Tasks;
 
 namespace WebBanHang.Models
 {
-    public class CartItem
-    {
+    //lớp biểu diễn 1 phần tử của giỏ hàng
+    public class CartItem {
+
         public Product Product { get; set; }
         public int Quantity { get; set; }
     }
+
+    //lớp biểu diễn giỏ hàng
     public class Cart
     {
-        private List<CartItem> _items = new List<CartItem>();
-       
-
-        public List<CartItem> Items { 
-            get { return _items; }
+        private List<CartItem> _items;
+        public Cart()
+        {
+            _items = new List<CartItem>();
         }
 
-        public void Add(Product sp , int qty)
+        public List<CartItem> Items { get { return _items; } }
+        //--------cac phuong thuc xu ly tren Giỏ hàng-----------
+        //phuong thuc them 1 san pham vào giỏ
+        public void Add(Product p, int qty)
         {
-            var item = _items.FirstOrDefault(x => x.Product.Id == sp.Id);
-            if (item == null)
+            var item = _items.FirstOrDefault(x => x.Product.Id ==p.Id);
+            if (item == null) //chưa có
             {
-                _items.Add(new CartItem { Product = sp, Quantity=qty });
+                _items.Add(new CartItem { Product = p, Quantity = qty });
             }
             else
             {
-                item.Quantity += 1;
+                item.Quantity += qty;
             }
         }
-        public void Update(int id, int quantity)
+        //phuong thuc cập nhật số lượng 
+        public void Update(int productId, int qty)
         {
-
+            var item = _items.FirstOrDefault(x => x.Product.Id == productId);
+            if (item != null)//tồn tại
+            {
+                if (qty > 0)
+                {
+                    item.Quantity = qty;
+                }
+                else
+                {
+                    _items.Remove(item);
+                }
+            }
         }
-        public void Remove(int id)
+        //phuong thuc cập nhật số lượng 
+        public void Remove(int productId)
         {
-
+            var item = _items.FirstOrDefault(x => x.Product.Id == productId);
+            if (item != null)
+            {
+                _items.Remove(item);
+            }
         }
-
+        //tính tổng thành tiền
+        public double Total {
+            get {
+                double total = _items.Sum(x =>x.Quantity * x.Product.Price);
+                return total;
+            }
+        }
+        //tính tổng số lượng sản phẩm
+         public double Quantity {
+            get {
+                double total = _items.Sum(x =>x.Quantity);
+                return total;
+            }
+        }
     }
 }
