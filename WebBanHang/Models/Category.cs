@@ -8,8 +8,8 @@ namespace WebBanHang.Models
 {
     public class Category
     {
-        public int Id { get; set; }
-        [Required, StringLength(50)]
+        public int Id { get; set;}
+        [Required(ErrorMessage = "Chưa nhập dữ liệu"), StringLength(50)]
         public String Name { get; set; }
         [Range(1, 100)]
         public int DisplayOrder { get; set; }

@@ -1,20 +1,30 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 namespace WebBanHang.Models
 {
-    public class ApplicationDbContext: DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> op) : base(op)
         {
         }
         public DbSet<Category> Categories { set; get; }
         public DbSet<Product> Products { set; get; }
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             //seed data to table Categories
             modelBuilder.Entity<Category>().HasData(
             new Category { Id = 1, Name = "Điện thoại", DisplayOrder = 1 },
@@ -35,5 +45,6 @@ namespace WebBanHang.Models
             new Product { Id = 11, Name = "Ipad Gen 10", Price = 750, CategoryId = 2 },
             new Product { Id = 12, Name = "Ipad Pro 11", Price = 1250, CategoryId = 2 });
         }
+
     }
 }

@@ -178,16 +178,7 @@ namespace WebBanHang.Controllers
             return RedirectToAction("Index");
         }
 
-        #region CAll_API
-        //---call API---------------------
-        // lấy tất cả sản phẩm
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var dsSanPham = _db.Products.Include(x => x.Category).ToList();
-            return Json(dsSanPham);
-        }
-        #endregion
+        
 
     }
 }

@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using WebBanHang.Models;
 
 namespace WebBanHang
@@ -25,10 +27,20 @@ namespace WebBanHang
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();            
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("name=DefaultConnection"));
+            services.AddControllersWithViews();
+            services.AddDbContext<ApplicationDbContext>(op => op.UseSqlServer("name=DefaultConnection"));
             services.AddSession();
-            
+            //services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            services.AddScoped<IEmailSender, EmailSender>();
+            services.AddRazorPages();
+            services.ConfigureApplicationCookie(op =>
+            {
+                op.LoginPath = "/Identity/Account/Login";
+                op.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                op.LogoutPath = "//Identity/Account/Logout";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,14 +59,16 @@ namespace WebBanHang
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
-                 endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
-                );
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+               name: "MyAreas",
+               pattern: "{area=customer}/{controller=home}/{action=Index}/{id?}");
             });
         }
     }
